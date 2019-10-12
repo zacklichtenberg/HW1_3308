@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Add New Article</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Add New Article</h1>
+  </div>
+
+  <form>
+
+    <div class="container">
+      <div class="form-group">
+        <label for="inputArticleTitle">
+          <h3>Article Title</h3>
+        </label>
+        <input type="text" class="form-control" id="inputArticleTitle" placeholder="Title">
+      </div>
+      <div class="form-group">
+        <label for="inputAuthorName">
+          <h3>Author Name</h3>
+        </label>
+        <input type="text" class="form-control" id="inputAuthorName" placeholder="Name">
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            <label for="uploadFiles">
+              <h3>Upload Files:</h3>
+            </label>
+            <input type="file" class="form-control-file" id="uploadFiles">
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group">
+            <label for="dropdownMenuButton">
+              <h3>Pages</h3>
+            </label>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle btn-block text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Academics
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Academics</a>
+                <a class="dropdown-item" href="#">Obituaries</a>
+                <a class="dropdown-item" href="#">Comics</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="form-group">
+        <label for="articleText">
+          <h3>Article text</h3>
+        </label>
+        <textarea class="form-control" id="articleText" rows="20"></textarea>
+      </div>
+
+
+
+
+
+
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+
+            <label>
+              <h3>Select Tags</h3>
+            </label>
+            <br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+              <label class="form-check-label" for="inlineCheckbox1">Python</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+              <label class="form-check-label" for="inlineCheckbox2">C++</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+              <label class="form-check-label" for="inlineCheckbox3">Java</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+              <label class="form-check-label" for="inlineCheckbox4">Scala</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+              <label class="form-check-label" for="inlineCheckbox5">Perl</label>
+            </div>
+          </div>
+
+          <div class="col-sm">
+            <h3>Visibility</h3>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Public
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Private
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <br>
+      <h3>Login to Finish Submitting</h3>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+            </div>
+          </div>
+
+          <div class="col-sm">
+            <div class="form-group">
+              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-check form-check">
+        <input class="form-check-input" type="checkbox" id="rememberMe" value="rememberMe">
+        <label class="form-check-label" for="rememberMe">Remember me</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+    </div>
+
+  </form>
+
+</body>
+
+</html>
