@@ -19,12 +19,17 @@ Similarly, A move by player 2(who is O) at Cell 'A3' --- The board_state[2] will
 We store the move of player 1 as '1' and player 2 as '0'. So after the above two moves the state should look like
 [1, -1, 0, -1, -1, -1, -1, -1, -1]
 */
-var board_state = [-1,-1,-1,-1,-1,-1,-1,-1,-1]
+var board_state = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 var win_board = [
-	[0,1,2],[3,4,5],[6,7,8],
-	[0,3,6],[1,4,7],[2,5,8],
-	[0,4,8],[2,4,6]
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
 ];
 
 
@@ -44,7 +49,7 @@ var turn = 1
  The methods @Returns true is the _str is null or it has a length of 0, otherwise, the methods returns false
 */
 function isEmpty(_str) {
-	return (!_str || 0 === _str.length)
+  return (!_str || 0 === _str.length)
 }
 
 /*
@@ -53,8 +58,8 @@ turn = 1 is for player_1 and
 turn = 0 is for player_2
 @Param - No param
 */
-function whose_move(){
-	return this.turn
+function whose_move() {
+  return this.turn
 }
 
 /*
@@ -65,7 +70,7 @@ if the turn is set to 1 it will make it 0
 if the turn is set to 0 it will make it 1
 */
 function toggle_move() {
-	this.turn = !this.turn
+  this.turn = !this.turn
 }
 
 /*
@@ -77,8 +82,8 @@ false means the game has not started
 When the game has not started the flag is set to false. As soon as the game starts the flag must be set to true.
 Once the game has finished or user has clicked on reset_play the flag must be set to false.
 */
-function game_started(){
-	return this.started
+function game_started() {
+  return this.started
 }
 
 
@@ -93,33 +98,31 @@ The method should do all the validations as stated in rule 1.
 5. Once game has started, Handle multiple clicks on begin play.
 */
 
-function begin_play(){
-	var p1name = document.getElementById("player1_id");
-	var p2name = document.getElementById("player2_id");
+function begin_play() {
+  var p1name = document.getElementById("player1_id");
+  var p2name = document.getElementById("player2_id");
 
-	if (game_started())
-	{
-		alert("game already started");
-		return;
-	}
+  if (game_started()) {
+    alert("game already started");
+    return;
+  }
 
-	if (isEmpty(p1name.value) || isEmpty(p2name.value))
-	{
-		alert("You must enter two player names");
-		return;
-	}
+  if (isEmpty(p1name.value) || isEmpty(p2name.value)) {
+    alert("You must enter two player names");
+    return;
+  }
 
-	p1name.disabled = true;
-	p2name.disabled = true;
+  p1name.disabled = true;
+  p2name.disabled = true;
 
-	p1name.value = p1name.value+" (X)";
-	p2name.value = p2name.value+" (O)";
+  p1name.value = p1name.value + " (X)";
+  p2name.value = p2name.value + " (O)";
 
-	this.started = true;
+  this.started = true;
 
-	this.turn = 1;
+  this.turn = 1;
 
-	update_status();
+  update_status();
 
 }
 
@@ -135,93 +138,88 @@ Remember to set the strated flag as false
 
 */
 
-function update_status(){
-    var p1Name = document.getElementById("player1_id");
-    var p2Name = document.getElementById("player2_id");
-    var statusMessage = document.getElementById("turn_info");
-
-    if (game_started() == false) {
-        statusMessage.innerHTML = "Game has not started.  Enter player names and click 'Begin Play'";
-    } else {
-        if (whose_move() == true) {
-            statusMessage.innerHTML = "Turn is for: <B>" + p1Name.value + "</B>";
-        } else {
-            statusMessage.innerHTML = "Turn is for: <B>" + p2Name.value + "</B>";
-        }
-    }
-
+function update_status() {
+  var p1Name = document.getElementById("player1_id");
+  var p2Name = document.getElementById("player2_id");
+  var statusMessage = document.getElementById("turn_info");
+  if (game_started() == false) {
+    statusMessage.innerHTML = "Game has not started.  Enter player names and click 'Begin Play'";
+  } else {
+    if (whose_move() == true) {
+      statusMessage.innerHTML = "Turn is for: <B>" + p1Name.value + "</B>";
+    } else {
+      statusMessage.innerHTML = "Turn is for: <B>" + p2Name.value + "</B>";
+    }
+  }
 }
 
 function update_board_state() {
-    var idx;
+  var idx;
+  for (idx = 0; idx < 9; idx++) {
+    var cell = document.getElementById(table_ids[idx]);
 
-    for (idx = 0; idx < 9; idx++) {
-        var cell = document.getElementById(table_ids[idx]);
-
-        switch (board_state[idx]) {
-            case -1:
-                cell.innerHTML = table_ids[idx];
-                break;
-            case 1:
-            case true:
-                cell.innerHTML = "<B>X</B>";
-                break;
-            case 0:
-            case false:
-                cell.innerHTML = "<B>O</B>";
-                break;
-        }
-    }
+    switch (board_state[idx]) {
+      case -1:
+        cell.innerHTML = table_ids[idx];
+        break;
+      case 1:
+      case true:
+        cell.innerHTML = "<B>X</B>";
+        break;
+      case 0:
+      case false:
+        cell.innerHTML = "<B>O</B>";
+        break;
+    }
+  }
 }
 
-function check_winner(player){
-    var idx;
+function check_winner(player) {
+  var idx;
+  for (idx = 0; idx < 8; idx++) {
+    if ((board_state[win_board[idx][0]] == player) &&
+      (board_state[win_board[idx][1]] == player) &&
+      (board_state[win_board[idx][2]] == player)) {
 
-    for (idx = 0; idx < 8; idx++) {
-        if ((board_state[win_board[idx][0]] == player) &&
-            (board_state[win_board[idx][1]] == player) &&
-            (board_state[win_board[idx][2]] == player)) {
+      var p1name = document.getElementById("player1_id");
+      var p2name = document.getElementById("player2_id");
+      var winnerName;
 
-            var p1name = document.getElementById("player1_id");
-            var p2name = document.getElementById("player2_id");
-            var winnerName;
+      if (player == true) winnerName = p1name.value;
+      else winnerName = p2name.value;
 
-            if (player == true) winnerName =  p1name.value;
-            else winnerName = p2name.value;
+      alert("We have a winner! Congratulations " + winnerName);
+      reset_play();
 
-            alert("We have a winner! Congratulations "+winnerName);
-            reset_play();
+      return true;
+    }
+  }
 
-            return true;
-        }
-    }
-
-    return false;
+  return false;
 }
 
 
-function reset_play(){
-	var p1name = document.getElementById("player1_id");
-	var p2name = document.getElementById("player2_id");
-	var moveid = document.getElementById("move_text_id");
+function reset_play() {
+  var p1name = document.getElementById("player1_id");
+  var p2name = document.getElementById("player2_id");
+  var moveid = document.getElementById("move_text_id");
 
-	this.started = false;
+  this.started = false;
 
-	p1name.disabled = false;
-	p2name.disabled = false;
+  p1name.disabled = false;
+  p2name.disabled = false;
 
-	p1name.value = "";
-	p2name.value = "";
-	moveid.value = "";
+  p1name.value = "";
+  p2name.value = "";
+  moveid.value = "";
 
-	var i = 0;
-	for (i = 0; i < 9; i++)
-	{
-		this.board_state[i] = -1;
-	}
+  var i = 0;
+  for (i = 0; i < 9; i++) {
+    this.board_state[i] = -1;
+  }
 
-	update_status();
-	update_board_state();
+  update_status();
+  update_board_state();
 
 }
 
@@ -242,34 +240,33 @@ The method should do all the things as stated in rule 2.
 
 */
 function play() {
-	if (!game_started())
-	{
-		alert("game not started");
-		return;
-	}
+  if (!game_started()) {
+    alert("game not started");
+    return;
+  }
 
-	var entryid = document.getElementById("move_text_id");
-	var moveIndex = table_ids.indexOf(entryid.value.toUpperCase());
+  var entryid = document.getElementById("move_text_id");
+  var moveIndex = table_ids.indexOf(entryid.value.toUpperCase());
 
-	if (moveIndex < 0) {
-        alert("Invalid move: '" + entryid.value + "': You must enter a coordinate from A1 to C3.");
-        return;
-    }
+  if (moveIndex < 0) {
+    alert("Invalid move: '" + entryid.value + "': You must enter a coordinate from A1 to C3.");
+    return;
+  }
 
-	if(board_state[moveIndex] != -1){
-		alert("Invalid move, box taken");
-		return;
-	}
+  if (board_state[moveIndex] != -1) {
+    alert("Invalid move, box taken");
+    return;
+  }
 
-	board_state[moveIndex] = whose_move();
-	update_board_state();
+  board_state[moveIndex] = whose_move();
+  update_board_state();
 
-	if (check_winner(whose_move()) == true){
-		return;
-	}
+  if (check_winner(whose_move()) == true) {
+    return;
+  }
 
-	toggle_move();
-	update_status();
+  toggle_move();
+  update_status();
 
 
 }
@@ -278,9 +275,9 @@ function play() {
 Do not change this method.
 */
 function moveEnter(event) {
-	if(event.keyCode == 13) {
-		event.preventDefault()
-		play()
-	}
+  if (event.keyCode == 13) {
+    event.preventDefault()
+    play()
+  }
 
 }
